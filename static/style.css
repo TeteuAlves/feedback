@@ -1,52 +1,80 @@
-.header_container{
+.header_container {
     display: flex;
     justify-content: center;
-
 }
 
-
-.form_container{
-
+.form_container {
     display: flex;
     justify-content: center;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
     gap: 15px;
-    
 }
 
-.form_container__label-usuario{
+.form_container__label-usuario, 
+.form_container__label-comentario {
     font-size: 2rem;
 }
 
-.form_container__label-comentario{
-    font-size: 2rem;
-}
-
-.form_container__user{
+.form_container__user, 
+.form_container__comentario {
     width: 25vw;
     height: 2.5vh;
 }
 
-.form_container__comentario{
-    width: 25vw;
-    height: 4vh;
-}
-
-.form_container__btn{
+.form_container__btn {
     width: 5vw;
     height: 5vh;
     cursor: pointer;
 }
 
-.format_border{
+.format_border {
     border-radius: 15px;
-    box-shadow: 1px 2px ;
+    box-shadow: 1px 2px;
 }
 
-.mensagem_container{
+.mensagem_container {
     margin-top: 50px;
     display: flex;
-    justify-content: center;
-    border: black;
+    flex-direction: column; /* Faz com que as mensagens fiquem uma abaixo da outra */
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.mensagem {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    width: 50%;
+    text-align: left;
+}
+
+.btn_excluir {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn_excluir:hover {
+    background-color: darkred;
+}
+
+.btn_like {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn_like:hover {
+    background-color: darkgreen;
 }

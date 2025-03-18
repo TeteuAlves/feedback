@@ -14,33 +14,37 @@
         <h1>Faça seu comentário</h1>
     </header>
     
+    <form action="/post/cadastrar_mensagem" method="post" class="form_container">
+        <label class="form_container__label-usuario">Usuário</label>
+        <input type="text" class="form_container__user format_border" name="user" required>
 
-<form action="/post/cadastrar_mensagem" method="post" class="form_container">
-
-   
-    <label class="form_container__label-usuario" >Usuário</label>
-    <input type="text" class="form_container__user format_border" name="user">
-
-    <label class="form_container__label-comentario" >Comentário</label>
-    <input type="text" class="form_container__comentario format_border" name="comentario" >
-  
-    
-    <button type="submit" class="form_container__btn format_border">Enviar</button>
-
-</form>
+        <label class="form_container__label-comentario">Comentário</label>
+        <input type="text" class="form_container__comentario format_border" name="comentario" required>
+      
+        <button type="submit" class="form_container__btn format_border">Enviar</button>
+    </form>
 
     <div class="mensagem_container">
-
-        {%for mensagem in mensagens }
+        {% for mensagem in mensagens %}
         <div class="mensagem">
+            <strong>{{ mensagem.nome }} ({{ mensagem.data_hora }})</strong>
+            <p>{{ mensagem.comentario }}</p>
 
-            <strong>{{mensagem.usuario}} ({{mensagem.data_hora}})</strong>
-            <p>{{mensagem.mensagem}}</p>
-            
+
+            <form action="/post/curtir_mensagem" method="post" style="display:inline;">
+                <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
+                <button type="submit" class="btn_like">Curtir</button>
+            </form>
+    
+            <p>Curtidas: {{ mensagem.curtidas }} vez(es)</p>
+
+            <!-- Botão para excluir a mensagem -->
+            <form action="/post/excluir_mensagem" method="post" style="display:inline;">
+                <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
+                <button type="submit" class="btn_excluir">Excluir</button>
+            </form>
         </div>
-
-        {%endfor%}
-
+        {% endfor %}
     </div>
     
 </body>
