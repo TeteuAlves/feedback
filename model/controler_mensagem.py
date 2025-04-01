@@ -56,3 +56,17 @@ class Mensagem:
         cursor.close()
         conexao.close()
 
+    @staticmethod
+    def descurtir_mensagem(cod_comentario):
+        conexao = Conexao.criar_conexao()
+        cursor = conexao.cursor()
+
+        # Atualiza o número de curtidas
+        sql = "UPDATE tb_comentarios SET curtidas = curtidas - 1 WHERE cod_comentario = %s"
+        valores = (cod_comentario,)
+
+        cursor.execute(sql, valores)
+        conexao.commit()
+
+        cursor.close()
+        conexao.close()

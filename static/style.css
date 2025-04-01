@@ -1,80 +1,175 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #6a0dad, #9b30ff);
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 .header_container {
     display: flex;
     justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 100%;
+    padding: 20px 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid white;
 }
+
+h1 {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+
+.btn_sair {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: red;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.btn_sair:hover {
+    background-color: darkred;
+    transform: scale(1.05);
+}
+
 
 .form_container {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    width: 40%;
 }
 
-.form_container__label-usuario, 
-.form_container__label-comentario {
-    font-size: 2rem;
+.form_container label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
 }
 
-.form_container__user, 
-.form_container__comentario {
-    width: 25vw;
-    height: 2.5vh;
+.form_container input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: white;
+    color: #6a0dad;
 }
+
 
 .form_container__btn {
-    width: 5vw;
-    height: 5vh;
+    width: 50%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #8a2be2;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
 }
 
-.format_border {
-    border-radius: 15px;
-    box-shadow: 1px 2px;
+.form_container__btn:hover {
+    background-color: #6a0dad;
+    transform: scale(1.05);
 }
 
+/* Caixa de mensagens */
 .mensagem_container {
-    margin-top: 50px;
+    margin-top: 30px;
     display: flex;
-    flex-direction: column; /* Faz com que as mensagens fiquem uma abaixo da outra */
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
     width: 100%;
 }
 
 .mensagem {
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    background: white;
+    color: #6a0dad;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     width: 50%;
     text-align: left;
+    margin-bottom: 15px;
+}
+
+
+.btn_like, .btn_dislike, .btn_excluir {
+    padding: 8px 15px;
+    margin-top: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn_like {
+    background-color: #7b1fa2;
+}
+
+.btn_dislike {
+    background-color: #ff4081;
 }
 
 .btn_excluir {
     background-color: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
+}
+
+.btn_like:hover {
+    background-color: #4a148c;
+    transform: scale(1.05);
+}
+
+.btn_dislike:hover {
+    background-color: #d81b60;
+    transform: scale(1.05);
 }
 
 .btn_excluir:hover {
     background-color: darkred;
+    transform: scale(1.05);
 }
 
-.btn_like {
-    background-color: green;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
+/* Responsividade */
+@media (max-width: 768px) {
+    .form_container, .mensagem {
+        width: 80%;
+    }
 
-.btn_like:hover {
-    background-color: darkgreen;
+    h1 {
+        font-size: 2rem;
+    }
+
+    .btn_like, .btn_dislike, .btn_excluir {
+        font-size: 0.9rem;
+    }
 }

@@ -12,12 +12,12 @@
 
     <header class="header_container">
         <h1>Faça seu comentário</h1>
+        <form action="/post/sair" method="get" style="position: absolute; top: 10px; left: 10px;">
+            <button type="submit" class="btn_sair">Sair</button>
+        </form>
     </header>
     
     <form action="/post/cadastrar_mensagem" method="post" class="form_container">
-        <label class="form_container__label-usuario">Usuário</label>
-        <input type="text" class="form_container__user format_border" name="user" required>
-
         <label class="form_container__label-comentario">Comentário</label>
         <input type="text" class="form_container__comentario format_border" name="comentario" required>
       
@@ -30,15 +30,18 @@
             <strong>{{ mensagem.nome }} ({{ mensagem.data_hora }})</strong>
             <p>{{ mensagem.comentario }}</p>
 
-
             <form action="/post/curtir_mensagem" method="post" style="display:inline;">
                 <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
                 <button type="submit" class="btn_like">Curtir</button>
             </form>
     
+            <form action="/post/descurtir_mensagem" method="post" style="display:inline;">
+                <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
+                <button type="submit" class="btn_dislike">Descurtir</button>
+            </form>
+
             <p>Curtidas: {{ mensagem.curtidas }} vez(es)</p>
 
-            <!-- Botão para excluir a mensagem -->
             <form action="/post/excluir_mensagem" method="post" style="display:inline;">
                 <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
                 <button type="submit" class="btn_excluir">Excluir</button>
