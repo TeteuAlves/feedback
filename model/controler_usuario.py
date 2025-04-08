@@ -34,7 +34,7 @@ class Usuario:
     @staticmethod
     def cadastrar(login, senha, nome):
         if Usuario.verificar_usuario_existe(login):
-            return False  # Retorna False se o usuário já existir
+            return False  
 
         conexao = Conexao.criar_conexao()
         cursor = conexao.cursor()
@@ -49,4 +49,4 @@ class Usuario:
         cursor.close()
         conexao.close()
         
-        return True  # Retorna True se o cadastro for bem-sucedido
+        return True 
