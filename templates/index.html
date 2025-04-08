@@ -1,53 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Sistema de Comentários</title>
-    <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coment</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <header>
-        <a href="{{ url_for('logout') }}">
-            <button>Sair</button>
-        </a>
-        <h2>{{ session['username'] }}</h2>
-        <button id="darkModeToggle">Modo Escuro</button>
-    </header>
+  <header class="header_container">
+    <h1>Faça seu comentário</h1>
+    <form action="/post/sair" method="get" style="position: absolute; top: 10px; left: 10px;">
+      <button type="submit" class="btn_sair">Sair</button>
+    </form>
+  </header>
 
-    <div class="container">
-        <h3>Comentários</h3>
+  <form action="/post/cadastrar_mensagem" method="post" class="form_container">
+    <label class="form_container__label-comentario">Comentário</label>
+    <input type="text" class="form_container__comentario format_border" name="comentario" required>
+    <button type="submit" class="form_container__btn format_border">Enviar</button>
+  </form>
 
-        {% for comentario in comentarios %}
-            <div class="comment-box">
-                <p><strong>{{ comentario.username }}</strong>: {{ comentario.texto }}</p>
-                <div class="comment-actions">
-                    {% if comentario.usuario_id == session['user_id'] %}
-                        <form action="{{ url_for('deletar_comentario', id=comentario.id) }}" method="POST">
-                            <button type="submit">Deletar</button>
-                        </form>
-                    {% endif %}
-                    <form action="{{ url_for('curtir_comentario', id=comentario.id) }}" method="POST">
-                        <button type="submit">Curtir ({{ comentario.curtidas }})</button>
-                    </form>
-                    <form action="{{ url_for('descurtir_comentario', id=comentario.id) }}" method="POST">
-                        <button type="submit">Descurtir ({{ comentario.descurtidas }})</button>
-                    </form>
-                </div>
-            </div>
-        {% endfor %}
-
-        <form action="{{ url_for('index') }}" method="POST">
-            <textarea name="comentario" rows="4" cols="50" placeholder="Digite seu comentário aqui..." required></textarea>
-            <br>
-            <button type="submit">Comentar</button>
-        </form>
+  <div class="mensagem_container">
+    {% for mensagem in mensagens %}
+    <div class="mensagem">
+      <strong>{{ mensagem.nome }} ({{ mensagem.data_hora }})</strong>
+      <p>{{ mensagem.comentario }}</p>
+      <form action="/post/curtir_mensagem" method="post" style="display:inline;">
+        <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
+        <button type="submit" class="btn_like">Curtir</button>
+      </form>
+      <form action="/post/descurtir_mensagem" method="post" style="display:inline;">
+        <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
+        <button type="submit" class="btn_dislike">Descurtir</button>
+      </form>
+      <p>Curtidas: {{ mensagem.curtidas }} vez(es)</p>
+      <form action="/post/excluir_mensagem" method="post" style="display:inline;">
+        <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
+        <button type="submit" class="btn_excluir">Excluir</button>
+      </form>
     </div>
-
-    <script>
-        const toggleBtn = document.getElementById('darkModeToggle');
-        toggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-        });
-    </script>
+    {% endfor %}
+  </div>
 </body>
 </html>

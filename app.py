@@ -12,7 +12,7 @@ def index():
         return redirect("/login")
 
     mensagens = Mensagem.recuperar_mensagens()
-    nome_usuario = session["usuario"] 
+    nome_usuario = session["usuario"]  # <- pega o nome
     return render_template("index.html", mensagens=mensagens, nome_usuario=nome_usuario)
 
 # Página de login/cadastro
@@ -95,4 +95,4 @@ def descurtir_mensagem():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+    app.run(debug=True)

@@ -1,28 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="/static/login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tela de Login</title>
+  <link rel="stylesheet" href="/static/login.css">
 </head>
 <body>
-    <div class="container">
-        <button id="darkModeToggle">Modo Escuro</button>
+  <div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
 
-        <h2>Login</h2>
-        <form action="{{ url_for('login') }}" method="POST">
-            <input type="text" name="username" placeholder="Usuário" required>
-            <input type="password" name="password" placeholder="Senha" required>
-            <button type="submit">Entrar</button>
-        </form>
-        <p>Não tem uma conta? <a href="{{ url_for('cadastro') }}">Cadastre-se</a></p>
+    <div class="nav-buttons">
+      <button id="login-btn">Login</button>
+      <button id="register-btn">Cadastrar</button>
     </div>
 
-    <script>
-        const toggleBtn = document.getElementById('darkModeToggle');
-        toggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-        });
-    </script>
+    <div class="form-container" id="login-form">
+      <h2>Login</h2>
+      <form action="/post/login" method="post">
+        <div class="input-group">
+          <label for="login">Nome de Usuário:</label>
+          <input type="text" id="login" name="login" placeholder="Digite seu nome de usuário" required>
+        </div>
+        <div class="input-group">
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+        </div>
+        <button type="submit" class="btn">Entrar</button>
+      </form>
+    </div>
+
+    <div class="form-container hidden" id="register-form">
+      <h2>Cadastrar</h2>
+      <form action="/post/cadastrar" method="post">
+        <div class="input-group">
+          <label for="nome">Nome Completo:</label>
+          <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+        </div>
+        <div class="input-group">
+          <label for="login-cadastro">Nome de Usuário:</label>
+          <input type="text" id="login-cadastro" name="login" placeholder="Escolha um nome de usuário" required>
+        </div>
+        <div class="input-group">
+          <label for="senha-cadastro">Senha:</label>
+          <input type="password" id="senha-cadastro" name="senha" placeholder="Digite sua senha" required>
+        </div>
+        <button type="submit" class="btn">Cadastrar</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('login-btn').addEventListener('click', function() {
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('register-form').style.display = 'none';
+    });
+
+    document.getElementById('register-btn').addEventListener('click', function() {
+      document.getElementById('register-form').style.display = 'block';
+      document.getElementById('login-form').style.display = 'none';
+    });
+  </script>
 </body>
 </html>
