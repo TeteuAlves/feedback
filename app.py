@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, flash
-from controler_usuario import Usuario
-from controler_mensagem import Mensagem
+from model.controler_usuario import Usuario
+from model.controler_mensagem import Mensagem
 
 app = Flask(__name__)
 app.secret_key = 'chave_secreta_segura' 
