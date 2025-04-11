@@ -1,106 +1,162 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, blueviolet, rgb(227, 99, 253));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 10px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color: white;
+  --text-color: #333;
+  --card-bg: #f9f9f9;
+  --input-bg: white;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --btn-bg: blueviolet;
+  --btn-hover: palevioletred;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1e1e1e;
+  --text-color: #f1f1f1;
+  --card-bg: #2a2a2a;
+  --input-bg: #333;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --btn-bg: #6a0dad;
+  --btn-hover: #d87093;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 10px;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow);
+  position: relative;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: var(--btn-bg);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--btn-hover);
+}
+
+.form-container {
+  display: none;
+}
+
+#login-form {
+  display: block;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  font-size: 14px;
+  color: var(--text-color);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--input-bg);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  color: var(--text-color);
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--btn-bg);
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--btn-hover);
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.messages {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.messages li {
+  background-color: #ffcdd2;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  color: #b71c1c;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+@media (max-width: 500px) {
   .container {
-    width: 100%;
-    max-width: 400px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
+    width: 90%;
+    padding: 15px;
   }
-  
-  .nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
+
   button {
-    padding: 10px 20px;
-    background-color: blueviolet;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: palevioletred;
-  }
-  
-  .form-container {
-    display: none;
-  }
-  
-  #login-form {
-    display: block;
-  }
-  
-  .input-group {
-    margin-bottom: 15px;
-  }
-  
-  .input-group label {
     font-size: 14px;
-    color: #555;
-    display: block;
-    margin-bottom: 5px;
+    padding: 8px 16px;
   }
-  
+
   .input-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    box-sizing: border-box;
+    font-size: 14px;
+    padding: 8px;
   }
-  
-  button[type="submit"] {
-    width: 100%;
-    padding: 12px;
-    background-color: blueviolet;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    color: white;
-    cursor: pointer;
+
+  .theme-toggle {
+    font-size: 20px;
   }
-  
-  button[type="submit"]:hover {
-    background-color: palevioletred;
-  }
-  
-  @media (max-width: 500px) {
-    .container {
-      width: 90%;
-      padding: 15px;
-    }
-  
-    button {
-      font-size: 14px;
-      padding: 8px 16px;
-    }
-  
-    .input-group input {
-      font-size: 14px;
-      padding: 8px;
-    }
-  }
-  
+}

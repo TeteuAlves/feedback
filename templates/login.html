@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +8,17 @@
 </head>
 <body>
   <div class="container">
+    <div class="top-bar">
+      <div class="nav-buttons">
+        <button id="login-btn">Login</button>
+        <button id="register-btn">Cadastrar</button>
+      </div>
+      <button id="theme-toggle" class="theme-toggle">🌙</button>
+    </div>
+
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ul>
+    <ul class="messages">
       {% for message in messages %}
       <li>{{ message }}</li>
       {% endfor %}
@@ -18,23 +26,18 @@
     {% endif %}
     {% endwith %}
 
-    <div class="nav-buttons">
-      <button id="login-btn">Login</button>
-      <button id="register-btn">Cadastrar</button>
-    </div>
-
     <div class="form-container" id="login-form">
       <h2>Login</h2>
       <form action="/post/login" method="post">
         <div class="input-group">
           <label for="login">Nome de Usuário:</label>
-          <input type="text" id="login" name="login" placeholder="Digite seu nome de usuário" required>
+          <input type="text" id="login" name="login" required>
         </div>
         <div class="input-group">
           <label for="senha">Senha:</label>
-          <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+          <input type="password" id="senha" name="senha" required>
         </div>
-        <button type="submit" class="btn">Entrar</button>
+        <button type="submit">Entrar</button>
       </form>
     </div>
 
@@ -43,31 +46,45 @@
       <form action="/post/cadastrar" method="post">
         <div class="input-group">
           <label for="nome">Nome Completo:</label>
-          <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+          <input type="text" id="nome" name="nome" required>
         </div>
         <div class="input-group">
           <label for="login-cadastro">Nome de Usuário:</label>
-          <input type="text" id="login-cadastro" name="login" placeholder="Escolha um nome de usuário" required>
+          <input type="text" id="login-cadastro" name="login" required>
         </div>
         <div class="input-group">
           <label for="senha-cadastro">Senha:</label>
-          <input type="password" id="senha-cadastro" name="senha" placeholder="Digite sua senha" required>
+          <input type="password" id="senha-cadastro" name="senha" required>
         </div>
-        <button type="submit" class="btn">Cadastrar</button>
+        <button type="submit">Cadastrar</button>
       </form>
     </div>
   </div>
 
   <script>
-    document.getElementById('login-btn').addEventListener('click', function() {
+    document.getElementById('login-btn').onclick = () => {
       document.getElementById('login-form').style.display = 'block';
       document.getElementById('register-form').style.display = 'none';
-    });
+    };
 
-    document.getElementById('register-btn').addEventListener('click', function() {
+    document.getElementById('register-btn').onclick = () => {
       document.getElementById('register-form').style.display = 'block';
       document.getElementById('login-form').style.display = 'none';
-    });
+    };
+
+    // Tema
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const storedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', storedTheme);
+    themeToggle.textContent = storedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeToggle.onclick = () => {
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    };
   </script>
 </body>
 </html>

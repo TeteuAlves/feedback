@@ -1,99 +1,171 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #222222;
+  --header-bg: #f0f0f0;
+  --input-bg: #ffffff;
+  --border-color: #cccccc;
+  --btn-primary: blueviolet;
+  --btn-hover: rebeccapurple;
+  --like-hover: lightgreen;
+  --dislike-hover: lightcoral;
+  --delete-color: red;
+  --delete-hover: white;
+  --mensagem-bg: #fdfdfd;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg-color: #1f1f1f;
+  --text-color: #f5f5f5;
+  --header-bg: #2a2a2a;
+  --input-bg: #333333;
+  --border-color: #555555;
+  --btn-primary: #6a0dad;
+  --btn-hover: #9a4efc;
+  --like-hover: #379137;
+  --dislike-hover: #a13b3b;
+  --delete-color: #ff4d4d;
+  --delete-hover: #fff;
+  --mensagem-bg: #2e2e2e;
+  --shadow: rgba(255, 255, 255, 0.05);
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, blueviolet, rgb(227, 99, 253));
-  }
-  
-  .header_container {
-    background-color: #fff;
-    padding: 20px;
-    text-align: center;
-    border-bottom: 3px solid blueviolet;
-    position: relative;
-  }
-  
-  .header_container h1 {
-    margin: 0;
-    font-size: 24px;
-  }
-  
-  .btn_sair {
-    background-color: red;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .btn_sair:hover {
-    background-color: darkred;
-  }
-  
-  .form_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-    gap: 10px;
-  }
-  
-  .format_border {
-    border-radius: 8px;
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-  
-  .form_container__btn {
-    background-color: blueviolet;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .form_container__btn:hover {
-    background-color: rebeccapurple;
-  }
-  
-  .mensagem_container {
-    margin: 20px;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 8px;
-  }
-  
-  .mensagem {
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
-  }
-  
-  .btn_like,
-  .btn_dislike,
-  .btn_excluir {
-    background-color: transparent;
-    border: 1px solid #000;
-    padding: 5px 10px;
-    margin-right: 5px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .btn_like:hover {
-    background-color: lightgreen;
-  }
-  
-  .btn_dislike:hover {
-    background-color: lightcoral;
-  }
-  
-  .btn_excluir {
-    border: 1px solid red;
-    color: red;
-  }
-  
-  .btn_excluir:hover {
-    background-color: red;
-    color: white;
-  }
-  
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.header_container {
+  background-color: var(--header-bg);
+  padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid var(--border-color);
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px var(--shadow);
+}
+
+.header_container h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.header_controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn_sair {
+  background-color: var(--delete-color);
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn_sair:hover {
+  background-color: darkred;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.form_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.form_container__label-comentario {
+  font-size: 16px;
+}
+
+.format_border,
+.form_container__comentario {
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+.form_container__btn {
+  background-color: var(--btn-primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form_container__btn:hover {
+  background-color: var(--btn-hover);
+}
+
+.mensagem_container {
+  margin: 20px auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  background-color: var(--mensagem-bg);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px var(--shadow);
+}
+
+.mensagem {
+  border-bottom: 1px solid var(--border-color);
+  padding: 15px 0;
+}
+
+.botoes {
+  display: flex;
+  gap: 10px;
+  margin: 8px 0;
+  flex-wrap: wrap;
+}
+
+.btn_like,
+.btn_dislike,
+.btn_excluir {
+  background-color: transparent;
+  border: 1px solid var(--text-color);
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--text-color);
+  transition: all 0.2s;
+}
+
+.btn_like:hover {
+  background-color: var(--like-hover);
+}
+
+.btn_dislike:hover {
+  background-color: var(--dislike-hover);
+}
+
+.btn_excluir {
+  border: 1px solid var(--delete-color);
+  color: var(--delete-color);
+}
+
+.btn_excluir:hover {
+  background-color: var(--delete-color);
+  color: var(--delete-hover);
+}

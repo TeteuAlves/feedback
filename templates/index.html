@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,10 +9,13 @@
 </head>
 <body>
   <header class="header_container">
-    <h1>Faça seu comentário</h1>
-    <form action="/post/sair" method="get" style="position: absolute; top: 10px; left: 10px;">
-      <button type="submit" class="btn_sair">Sair</button>
-    </form>
+    <h1>Olá, {{ nome_usuario }}!</h1>
+    <div class="header_controls">
+      <form action="/post/sair" method="get">
+        <button type="submit" class="btn_sair">Sair</button>
+      </form>
+      <button id="theme-toggle" class="theme-toggle">🌙</button>
+    </div>
   </header>
 
   <form action="/post/cadastrar_mensagem" method="post" class="form_container">
@@ -26,21 +29,38 @@
     <div class="mensagem">
       <strong>{{ mensagem.nome }} ({{ mensagem.data_hora }})</strong>
       <p>{{ mensagem.comentario }}</p>
-      <form action="/post/curtir_mensagem" method="post" style="display:inline;">
-        <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
-        <button type="submit" class="btn_like">Curtir</button>
-      </form>
-      <form action="/post/descurtir_mensagem" method="post" style="display:inline;">
-        <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
-        <button type="submit" class="btn_dislike">Descurtir</button>
-      </form>
+      <div class="botoes">
+        <form action="/post/curtir_mensagem" method="post">
+          <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
+          <button type="submit" class="btn_like">Curtir</button>
+        </form>
+        <form action="/post/descurtir_mensagem" method="post">
+          <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
+          <button type="submit" class="btn_dislike">Descurtir</button>
+        </form>
+        <form action="/post/excluir_mensagem" method="post">
+          <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
+          <button type="submit" class="btn_excluir">Excluir</button>
+        </form>
+      </div>
       <p>Curtidas: {{ mensagem.curtidas }} vez(es)</p>
-      <form action="/post/excluir_mensagem" method="post" style="display:inline;">
-        <input type="hidden" name="id_mensagem" value="{{ mensagem.cod_comentario }}">
-        <button type="submit" class="btn_excluir">Excluir</button>
-      </form>
     </div>
     {% endfor %}
   </div>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const storedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', storedTheme);
+    themeToggle.textContent = storedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeToggle.onclick = () => {
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    };
+  </script>
 </body>
 </html>
