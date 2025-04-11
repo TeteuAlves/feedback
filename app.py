@@ -25,9 +25,7 @@ def login_post():
 
     if Usuario.validar_login(login, senha):
      
-        conexao = Usuario()
-        conexao = Usuario()
-        conexao_bd = conexao.Conexao__criar_conexao()
+        conexao_bd = Conexao.criar_conexao()
         cursor = conexao_bd.cursor(dictionary=True)
         cursor.execute("SELECT nome FROM tb_usuarios WHERE login = %s", (login,))
         usuario = cursor.fetchone()
