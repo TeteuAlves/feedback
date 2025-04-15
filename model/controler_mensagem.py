@@ -70,3 +70,22 @@ class Mensagem:
 
         cursor.close()
         conexao.close()
+
+    @staticmethod
+    def ultima_mensagem(nome_usuario):
+        conexao = Conexao.criar_conexao()
+        cursor = conexao.cursor(dictionary=True)
+
+        cursor.execute("""
+            SELECT cod_comentario, nome, comentario, data_hora, curtidas 
+            FROM tb_comentarios 
+            WHERE nome = %s 
+            ORDER BY data_hora DESC 
+            LIMIT 1
+            """, (nome_usuario,))
+    
+        mensagem = cursor.fetchone()
+
+        cursor.close()
+        conexao.close()
+        return mensagem

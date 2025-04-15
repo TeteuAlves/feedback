@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, flash
+from flask import Flask, render_template, request, jsonify ,redirect, session, flash
 from model.controler_usuario import Usuario
 from model.controler_mensagem import Mensagem
 import os
@@ -139,6 +139,16 @@ def excluir_mensagem():
 def sair():
     session.clear()
     return redirect("/login")
+
+@app.route("/api/get/mensagens")
+def api_get_mensagens():
+    mensagens = Mensagem.recuperar_mensagens()
+    return jsonify(mensagens)
+
+@app.route("/api/get/ultimamensagens/<usuario>")
+def api_get_ultima_mensagem(usuario):
+    mensagens = Mensagem.ultima_mensagem(usuario)
+    return jsonify(mensagens)
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 10000))
